@@ -30,6 +30,15 @@
     <ClInclude Include="MapObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DrawObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TankObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +51,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MapObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TankObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
