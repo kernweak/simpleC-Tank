@@ -148,6 +148,9 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BulletObject.h" />
     <ClInclude Include="DrawObject.h" />
+    <ClInclude Include="FileEdit.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="MapEdit.h" />
     <ClInclude Include="MapObject.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TankObject.h" />
@@ -157,6 +160,9 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="BulletObject.cpp" />
     <ClCompile Include="DrawObject.cpp" />
+    <ClCompile Include="FileEdit.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="MapEdit.cpp" />
     <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="simpleC++Tank.cpp" />
     <ClCompile Include="stdafx.cpp">
