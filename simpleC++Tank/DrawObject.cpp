@@ -13,6 +13,8 @@ CDrawObject::~CDrawObject()
 
 bool CDrawObject::DrawPatterning(int nPosX, int nPosY, int nType)
 {
+	if(nType==0)
+		WriteChar(nPosX, nPosY, "  ", 0);
 	if(nType == 1)
 		WriteChar(nPosX, nPosY, "¨€", 7);
 	if(nType == 2)

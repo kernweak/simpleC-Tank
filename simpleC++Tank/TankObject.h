@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseObject.h"
 #include "MapObject.h"
+#include "DrawObject.h"
 enum DIRE {
 	UP, DOWN, RIGHT, LEFT,
 };
@@ -15,10 +16,14 @@ public:
 public:
 	//根据类型获取坦克出生地，返回对应的坦克（用于重生）
 	CTankObject getTankBirthPlace(int nType);
-//	bool MoveTank(int nDir);//移动坦克
-//	bool TankCollision(CTankObject TankObject);//碰撞判断
+	bool MoveTank(char nDir);//移动坦克
+	bool TankCollision(CTankObject TankObject, char nDir);//碰撞判断
 	void setMapObj(CMapObject* pMapObject);//设置地图的对象，每个坦克对象都有地图的地址
 //	CMapObject* getMapObj();
+	int initp(DIRE dir,CTankObject& temp);
+	COORD getbody(int i);
+	int getm_nType();
+
 //
 //	/////////////////////
 //	//这一组函数用于返回坦克属性，在创建子弹是用到
@@ -40,6 +45,7 @@ private:
 	int m_nBlood;  //坦克血量
 	int m_nScore;  //坦克杀敌分数
 	CMapObject* m_pMapObject;  //地图对象指针
-	int m_TankShape[4][3][3] = {};
+	COORD body[6] = {};
+	
 };
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameObject.h"
+#include <conio.h>
 
 
 CGameObject::CGameObject()
@@ -36,6 +37,8 @@ CMapObject & CGameObject::getMap()
 	return m_MapObject;
 	// TODO: 在此处插入 return 语句
 }
+
+
 
 void CGameObject::ShowCursor()
 {
@@ -120,20 +123,71 @@ void CGameObject::menu()
 	}
 }
 
+CMapObject CGameObject::pushOneTankMap(CMapObject & mapadd,int i)
+{
+	
+		for (int j = 0;j < 6;j++) {
+			mapadd.setMapValue(m_vecTankObject[i].getbody(j).X, m_vecTankObject[i].getbody(j).Y, m_vecTankObject[i].getm_nType());
+	}
+	return mapadd;
+}
+
+CMapObject CGameObject::pushMap(CMapObject & mapadd)
+{
+	for (int i = 0;i < m_vecTankObject.size();i++) {
+		for(int j = 0;j < 6;j++) {
+			mapadd.setMapValue(m_vecTankObject[i].getbody(j).X,m_vecTankObject[i].getbody(j).Y, m_vecTankObject[i].getm_nType());
+		}
+		
+	}
+	return mapadd;
+}
+
 bool CGameObject::InitTankInfo()
 {
 	CTankObject TemTankObject;
-	TemTankObject = TemTankObject.getTankBirthPlace(PALY_MY);
-	m_vecTankObject.push_back(TemTankObject);
-	for (int i = 0;i < m_vecTankObject.size();i++) {
-		m_vecTankObject[i].setMapObj(&m_MapObject);
-		m_vecTankObject[i].DrawObject();
+	for (int i = 4;i < 9;i++) {
+		TemTankObject = TemTankObject.getTankBirthPlace(i);
+		m_vecTankObject.push_back(TemTankObject);
+		pushMap(m_MapObject);
 	}
+		for (int i = 0;i < m_vecTankObject.size();i++) {
+			m_vecTankObject[i].setMapObj(&m_MapObject);
+			m_vecTankObject[i].DrawObject();
+		}
+
+	
 	return true;
 }
 
 bool CGameObject::StartGame()
 {
+	InitTankInfo();
+	bool pauseFlag = true;//0为暂停
+	bool stopMove = true;
+	char press = 0;
+	char dir[4] = { 'w','s', 'd','a' };
+	while (press != 0X1b && stopMove) {
+		if (_kbhit()) {
+			press = _getch();
+			if (press == 0x20) {
+				pauseFlag = !pauseFlag;
+			}
+			if (press == 0x71)
+			{
+			}
+			m_vecTankObject[0].MoveTank(press);
+			pushOneTankMap(m_MapObject, 0);
+			for (int i = 0;i < m_vecTankObject.size();i++) {
+				m_vecTankObject[i].setMapObj(&m_MapObject);
+				m_vecTankObject[i].DrawObject();
+			}
 
-	return false;
+		}
+		if (pauseFlag) {
+			continue;
+		}
+	}
+
+	return true;
 }

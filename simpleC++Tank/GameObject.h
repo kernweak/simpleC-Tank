@@ -7,6 +7,11 @@
 #include<Windows.h>
 #include"DrawObject.h"
 #define PALY_MY 0
+#define PALY_FRIEND 1
+#define PALY_ANAMY1 2
+#define PALY_ANAMY2 3
+#define PALY_ANAMY3 4
+
 class CGameObject
 {
 public:
@@ -27,7 +32,8 @@ public:
 private:
 	//地图对象（整个游戏都是使用该地图对象）
 	CMapObject m_MapObject;
-	
+	CMapObject pushMap(CMapObject& mapadd);
+	CMapObject pushOneTankMap(CMapObject & mapadd,int i);
 	//坦克向量，第一个第二一个是玩家和友军
 	vector<CTankObject> m_vecTankObject;
 //	vector<CBulletObject> m_vecBulletObject;
