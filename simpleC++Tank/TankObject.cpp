@@ -204,11 +204,17 @@ bool CTankObject::TankCollisionTurn(CTankObject& TankObject, char nDir)
 	case 'w':
 		if (TankObject.m_nDir == LEFT) {
 			if (m_pMapObject->getMapValue(TankObject.body[2].X - 1, TankObject.body[2].Y) != 0 )
-				return false;
+			{
+				this->m_nPosY = this->m_nPosY - 1;
+				initp(UP, *this);
+			}
 		}
 		else if (TankObject.m_nDir == RIGHT) {
 			if (m_pMapObject->getMapValue(TankObject.body[3].X + 1, TankObject.body[3].Y) != 0)
-				return false;
+			{
+				this->m_nPosY = this->m_nPosY - 1;
+				initp(UP, *this);
+			}
 		}
 		else if (TankObject.m_nDir == DOWN) {
 			if (m_pMapObject->getMapValue(TankObject.body[3].X, TankObject.body[3].Y + 1) != 0 ||
@@ -223,11 +229,17 @@ bool CTankObject::TankCollisionTurn(CTankObject& TankObject, char nDir)
 	case 's':
 		if (TankObject.m_nDir == LEFT) {
 			if (m_pMapObject->getMapValue(TankObject.body[3].X - 1, TankObject.body[3].Y) != 0)
-				return false;
+			{
+				this->m_nPosY = this->m_nPosY + 1;
+				initp(DOWN, *this);
+			}
 		}
 		else if (TankObject.m_nDir == RIGHT) {
 			if (m_pMapObject->getMapValue(TankObject.body[2].X + 1, TankObject.body[2].Y) != 0)
-				return false;
+			{
+				this->m_nPosY = this->m_nPosY + 1;
+				initp(DOWN, *this);
+			}
 		}
 		else if (TankObject.m_nDir == UP) {
 			if (m_pMapObject->getMapValue(TankObject.body[3].X, TankObject.body[3].Y - 1) != 0 ||
@@ -243,11 +255,17 @@ bool CTankObject::TankCollisionTurn(CTankObject& TankObject, char nDir)
 	case 'a':
 		if (TankObject.m_nDir ==UP) {
 			if (m_pMapObject->getMapValue(TankObject.body[3].X , TankObject.body[3].Y-1) != 0)
-				return false;
+			{
+				this->m_nPosX = this->m_nPosX - 1;
+				initp(LEFT, *this);
+			}
 		}
 		else if (TankObject.m_nDir == DOWN) {
 			if (m_pMapObject->getMapValue(TankObject.body[2].X, TankObject.body[2].Y+1) != 0)
-				return false;
+			{
+				this->m_nPosX = this->m_nPosX - 1;
+				initp(LEFT, *this);
+			}
 		}
 		else if (TankObject.m_nDir == RIGHT) {
 			if (m_pMapObject->getMapValue(TankObject.body[3].X+1, TankObject.body[3].Y ) != 0 ||
@@ -262,11 +280,17 @@ bool CTankObject::TankCollisionTurn(CTankObject& TankObject, char nDir)
 	case 'd':
 		if (TankObject.m_nDir == UP) {
 			if (m_pMapObject->getMapValue(TankObject.body[2].X, TankObject.body[3].Y - 1) != 0)
-				return false;
+			{
+				this->m_nPosX = this->m_nPosX + 1;
+				initp(RIGHT, *this);
+			}
 		}
 		else if (TankObject.m_nDir == DOWN) {
 			if (m_pMapObject->getMapValue(TankObject.body[3].X, TankObject.body[2].Y + 1) != 0)
-				return false;
+			{
+				this->m_nPosX = this->m_nPosX + 1;
+				initp(RIGHT, *this);
+			}
 		}
 		else if (TankObject.m_nDir == LEFT) {
 			if (m_pMapObject->getMapValue(TankObject.body[3].X - 1, TankObject.body[3].Y) != 0 ||
