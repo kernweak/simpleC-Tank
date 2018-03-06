@@ -26,12 +26,12 @@ void CMapEdit::MouseEventProc(MOUSE_EVENT_RECORD mer, CMapObject& m_MapObject) {
 	{
 	case 0:
 		if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED) {
-			m_MapObject.setMapValue(mer.dwMousePosition.X / 2, mer.dwMousePosition.Y,1);
+			m_MapObject.setMapValue(mer.dwMousePosition.Y,mer.dwMousePosition.X / 2, 1);
 			WriteChar(mer.dwMousePosition.X / 2, mer.dwMousePosition.Y, "¨€", 7);
 			WriteChar(56, 1, "×ó¼ü µ¥»÷", 7);
 		}
 		else if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED) {
-			m_MapObject.setMapValue(mer.dwMousePosition.X / 2, mer.dwMousePosition.Y, 2);
+			m_MapObject.setMapValue(mer.dwMousePosition.Y,mer.dwMousePosition.X / 2 , 2);
 			WriteChar(mer.dwMousePosition.X / 2, mer.dwMousePosition.Y, "¨ˆ", 4);
 			WriteChar(56, 1, "ÓÒ¼ü µ¥»÷", 7);
 		}

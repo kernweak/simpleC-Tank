@@ -18,15 +18,15 @@ void CMapObject::initMap()
 }
 
 bool CMapObject::setMapValue(int nPosX, int nPosY, int nValue)
-{	if(nPosX>=70||nPosX<=0||nPosY<=0||nPosY>=50)
+{	if(nPosX>=50||nPosX<=0||nPosY<=0||nPosY>=70)
 	return false;
-m_nArrMap[nPosY][nPosX] = nValue;
+m_nArrMap[nPosX][nPosY] = nValue;
 	return true;
 }
 
 int CMapObject::getMapValue(int nPosX, int nPosY)
 {
-	return m_nArrMap[nPosX][nPosY];
+	return m_nArrMap[nPosY][nPosX];
 }
 
 bool CMapObject::DrawMap()

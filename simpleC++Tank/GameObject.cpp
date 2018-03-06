@@ -127,7 +127,7 @@ CMapObject CGameObject::pushOneTankMap(CMapObject & mapadd,int i)
 {
 	
 		for (int j = 0;j < 6;j++) {
-			mapadd.setMapValue(m_vecTankObject[i].getbody(j).X, m_vecTankObject[i].getbody(j).Y, m_vecTankObject[i].getm_nType());
+			mapadd.setMapValue(m_vecTankObject[i].getbody(j).Y,m_vecTankObject[i].getbody(j).X,  m_vecTankObject[i].getm_nType());
 	}
 	return mapadd;
 }
@@ -136,7 +136,7 @@ CMapObject CGameObject::pushMap(CMapObject & mapadd)
 {
 	for (int i = 0;i < m_vecTankObject.size();i++) {
 		for(int j = 0;j < 6;j++) {
-			mapadd.setMapValue(m_vecTankObject[i].getbody(j).X,m_vecTankObject[i].getbody(j).Y, m_vecTankObject[i].getm_nType());
+			mapadd.setMapValue(m_vecTankObject[i].getbody(j).Y,m_vecTankObject[i].getbody(j).X, m_vecTankObject[i].getm_nType());
 		}
 		
 	}
@@ -160,6 +160,8 @@ bool CGameObject::InitTankInfo()
 	return true;
 }
 
+
+
 bool CGameObject::StartGame()
 {
 	InitTankInfo();
@@ -175,6 +177,10 @@ bool CGameObject::StartGame()
 			}
 			if (press == 0x71)
 			{
+			}
+
+			for (int i = 0;i < 6;i++) {
+				m_MapObject.setMapValue(m_vecTankObject[0].getbody(i).Y, m_vecTankObject[0].getbody(i).X, 0);
 			}
 			m_vecTankObject[0].MoveTank(press);
 			pushOneTankMap(m_MapObject, 0);

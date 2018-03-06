@@ -18,6 +18,7 @@ public:
 	CTankObject getTankBirthPlace(int nType);
 	bool MoveTank(char nDir);//移动坦克
 	bool TankCollision(CTankObject TankObject, char nDir);//碰撞判断
+	bool TankCollisionTurn(CTankObject& TankObject, char nDir);//转向碰撞判断
 	void setMapObj(CMapObject* pMapObject);//设置地图的对象，每个坦克对象都有地图的地址
 //	CMapObject* getMapObj();
 	int initp(DIRE dir,CTankObject& temp);
