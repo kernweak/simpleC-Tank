@@ -8,6 +8,8 @@ int main()
 {
 	CGameObject game;
 	game.InitSometing();
+	game.WelcomeUI();
+	game.menu();
     return 0;
 }
 

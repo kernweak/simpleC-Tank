@@ -4,6 +4,9 @@
 
 CGameObject::CGameObject()
 {
+	CMapObject m_MapObject;
+	
+
 }
 
 
@@ -21,8 +24,17 @@ bool CGameObject::InitSometing()
 
 bool CGameObject::WelcomeUI()
 {
-
+	CDrawObject b;
+	b.DrawWelcome();
 	return true;
+}
+
+
+
+CMapObject & CGameObject::getMap()
+{
+	return m_MapObject;
+	// TODO: 在此处插入 return 语句
 }
 
 void CGameObject::ShowCursor()
@@ -67,4 +79,61 @@ bool CGameObject::shiftThing()
 	Sleep(100);
 	keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0);
 	return true;
+}
+
+void CGameObject::menu()
+{
+	CDrawObject a;
+	while (1) {
+		system("cls");
+		char f1[50] = "*              1.开始游戏                *";
+		char f2[50] = "*              2.编辑地图                *";
+		char f3[50] = "*              3.继续游戏                *";
+		char f4[50] = "*              4.保存游戏                *";
+		char f5[50] = "*              5.退出游戏                *";
+		a.WriteChar(20, 20, "******************************************", 7);
+		a.WriteChar(20, 21, "****************请选择下列选项************", 7);
+		a.WriteChar(20, 22, "******************************************", 7);
+		a.WriteChar(20, 23, f1, 7);
+		a.WriteChar(20, 24, f2, 7);
+		a.WriteChar(20, 25, f3, 7);
+		a.WriteChar(20, 26, f4, 7);
+		a.WriteChar(20, 27, f5, 7);
+		a.WriteChar(20, 28, "******************************************", 7);
+		int i = -1;
+		CMapEdit r;
+		cin >> i;
+		if (i == 5)break;
+		switch(i) {
+		case 1:
+			system("cls");
+			getMap().DrawMap();
+			StartGame();
+			break;
+		case 2:
+			system("cls");
+			r.mapEdit(getMap());
+			break;
+		case 5:
+			break;
+		}
+	}
+}
+
+bool CGameObject::InitTankInfo()
+{
+	CTankObject TemTankObject;
+	TemTankObject = TemTankObject.getTankBirthPlace(PALY_MY);
+	m_vecTankObject.push_back(TemTankObject);
+	for (int i = 0;i < m_vecTankObject.size();i++) {
+		m_vecTankObject[i].setMapObj(&m_MapObject);
+		m_vecTankObject[i].DrawObject();
+	}
+	return true;
+}
+
+bool CGameObject::StartGame()
+{
+
+	return false;
 }
