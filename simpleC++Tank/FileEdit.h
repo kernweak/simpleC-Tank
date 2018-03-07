@@ -4,5 +4,6 @@ class CFileEdit
 public:
 	CFileEdit();
 	~CFileEdit();
+
 };
 

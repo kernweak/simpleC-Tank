@@ -248,9 +248,10 @@ bool CGameObject::StartGame()
 					m_vecBulletObject[i].MoveBullet(m_vecTankObject);
 					getMap()=*(m_vecBulletObject[i].getMapObj());
 					if (!m_vecBulletObject[i].getBulletIsDie())//移动完判断是否死了，死了就不打印了
+					{
 						m_MapObject.setMapValue(m_vecBulletObject[i].getBulletPosY(), m_vecBulletObject[i].getBulletPosX(), m_vecBulletObject[i].getBulletType());
 						m_vecBulletObject[i].DrawObject(m_vecBulletObject[i].getBulletPosX(), m_vecBulletObject[i].getBulletPosY(), m_vecBulletObject[i].getBulletType());
-					
+					}
 				}
 				else
 					m_vecBulletObject.erase(m_vecBulletObject.begin()+i);
