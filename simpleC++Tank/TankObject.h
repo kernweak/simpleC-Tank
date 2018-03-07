@@ -20,7 +20,7 @@ public:
 	bool TankCollision(CTankObject TankObject, char nDir);//碰撞判断
 	bool TankCollisionTurn(CTankObject& TankObject, char nDir);//转向碰撞判断
 	void setMapObj(CMapObject* pMapObject);//设置地图的对象，每个坦克对象都有地图的地址
-//	CMapObject* getMapObj();
+	CMapObject* getMapObj();
 	int initp(DIRE dir,CTankObject& temp);
 	COORD getbody(int i);
 	int getm_nType();
@@ -28,14 +28,14 @@ public:
 //
 //	/////////////////////
 //	//这一组函数用于返回坦克属性，在创建子弹是用到
-//	bool getTankIsDie();
-//	int getAlignment();
-//	int getTankTankPosX();
-//	int getTankTankPosY();
-//	int getTankDir();
-//	int getTankType();
-//	int getTankBlood();
-//	int getTankScores();
+	bool getTankIsDie();
+	int getAlignment();
+	int getTankPosX();
+	int getTankPosY();
+	int getTankDir();
+	int getTankType();
+	int getTankBlood();
+	int getTankScores();
 private:
 	bool m_IsDie;//坦克是否死亡
 	int m_Alignment;//所属阵营

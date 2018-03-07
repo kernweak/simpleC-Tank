@@ -28,7 +28,7 @@ bool CTankObject::ClsObject()
 	return true;
 }
 
-CTankObject CTankObject::getTankBirthPlace(int nType)//0为自己，1为友军
+CTankObject CTankObject::getTankBirthPlace(int nType)//4为自己，5为友军
 {
 	CTankObject temp;
 	temp.m_IsDie = false;
@@ -313,6 +313,11 @@ void CTankObject::setMapObj(CMapObject * pMapObject)
 	m_pMapObject = pMapObject;
 }
 
+CMapObject * CTankObject::getMapObj()
+{
+	return m_pMapObject;
+}
+
 int CTankObject::initp(DIRE dir, CTankObject& temp)
 {
 	if (UP == dir) {
@@ -384,3 +389,45 @@ int CTankObject::getm_nType()
 {
 	return m_nType;
 }
+
+bool CTankObject::getTankIsDie()
+{
+	return m_IsDie;
+}
+
+int CTankObject::getAlignment()
+{
+	return m_Alignment;
+}
+
+int CTankObject::getTankPosX()
+{
+	return m_nPosX;
+}
+
+int CTankObject::getTankPosY()
+{
+	return m_nPosY;
+}
+
+int CTankObject::getTankDir()
+{
+	return m_nDir;
+}
+
+int CTankObject::getTankType()
+{
+	return m_nType;
+}
+
+int CTankObject::getTankBlood()
+{
+	return m_nBlood;
+}
+
+int CTankObject::getTankScores()
+{
+	return m_nScore;
+}
+
+
