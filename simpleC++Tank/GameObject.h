@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseObject.h"
-//#include "BulletObject.h"
+#include "BulletObject.h"
 #include "MapObject.h"
 #include "MapEdit.h"
 #include "TankObject.h"
@@ -36,7 +36,7 @@ private:
 	CMapObject pushOneTankMap(CMapObject & mapadd,int i);
 	//坦克向量，第一个第二一个是玩家和友军
 	vector<CTankObject> m_vecTankObject;
-//	vector<CBulletObject> m_vecBulletObject;
+	vector<CBulletObject> m_vecBulletObject;
 	void ShowCursor();//隐藏光标
 	 //设置控制台
 	bool SetWindowSize(char* pszWindowTitle, int nX, int nY);

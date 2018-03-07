@@ -169,9 +169,11 @@ bool CGameObject::StartGame()
 	bool pauseFlag = false;//1为暂停
 	bool stopMove = true;
 	char press = 0;
-	char dir[4] = { 'w','s', 'd','a' };
+	char dir[4] = { 'w','s', 'a','d' };
 	clock_t start, finish;//敌军坦克移动间隔
+	clock_t start1, finish1;//子弹移动间隔
 	start = clock();
+	start1 = clock();
 	while (press != 0X1b && stopMove) {
 		if (_kbhit()) {
 			press = _getch();
@@ -180,6 +182,10 @@ bool CGameObject::StartGame()
 			}
 			if (press == 0x71)//发射炮弹
 			{
+				CBulletObject TemBulletObject;
+				TemBulletObject= TemBulletObject.CreateBullet(m_vecTankObject[0], m_vecTankObject);
+				m_vecBulletObject.push_back(TemBulletObject);
+				//if(TemBulletObject.getBulletIsDie)
 			}
 
 			for (int i = 0;i < 6;i++) {//先将玩家坦克从地图擦除再移动
@@ -190,7 +196,7 @@ bool CGameObject::StartGame()
 			//把容器0位置坦克写入到地图中
 			pushOneTankMap(m_MapObject, 0);
 			for (int i = 0;i < m_vecTankObject.size();i++) {
-				//把更新过的地图写入到没一个坦克
+				//把更新过的地图写入到每一个坦克
 				m_vecTankObject[i].setMapObj(&m_MapObject);
 				m_vecTankObject[i].DrawObject();
 			}
@@ -217,14 +223,39 @@ bool CGameObject::StartGame()
 						a = rand() % 4;
 						m_vecTankObject[j].MoveTank(dir[a]);
 						pushOneTankMap(m_MapObject, j);
+						if ((a = rand() % 8) % 4 == 0) {
+							CBulletObject TemBulletObject;
+							TemBulletObject = TemBulletObject.CreateBullet(m_vecTankObject[j], m_vecTankObject);
+							m_vecBulletObject.push_back(TemBulletObject);
+						}
+
 				}
 				for (int i = 0;i < m_vecTankObject.size();i++) {
-					//把更新过的地图写入到没一个坦克
+					//把更新过的地图写入到每一个坦克
 					m_vecTankObject[i].setMapObj(&m_MapObject);
 					m_vecTankObject[i].DrawObject();
 				}
 	//		}
 
+		}
+		finish1 = clock();
+		if (finish1 - start1 > 100) {
+			start1 = finish1;
+			for (int i = 0;i < m_vecBulletObject.size();i++) {
+				//先判断子弹是否已经是死的了，死的就不移动了
+				if (!m_vecBulletObject[i].getBulletIsDie()) {
+					//如果子弹不是死的，先删除子弹原来所在位置
+					m_vecBulletObject[i].MoveBullet(m_vecTankObject);
+					getMap()=*(m_vecBulletObject[i].getMapObj());
+					if (!m_vecBulletObject[i].getBulletIsDie())//移动完判断是否死了，死了就不打印了
+						m_MapObject.setMapValue(m_vecBulletObject[i].getBulletPosY(), m_vecBulletObject[i].getBulletPosX(), m_vecBulletObject[i].getBulletType());
+						m_vecBulletObject[i].DrawObject(m_vecBulletObject[i].getBulletPosX(), m_vecBulletObject[i].getBulletPosY(), m_vecBulletObject[i].getBulletType());
+					
+				}
+				else
+					m_vecBulletObject.erase(m_vecBulletObject.begin()+i);
+				
+			}
 		}
 
 	}

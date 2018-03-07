@@ -30,6 +30,7 @@ bool CTankObject::ClsObject()
 
 CTankObject CTankObject::getTankBirthPlace(int nType)//4为自己，5为友军
 {
+	tankSum = tankSum - 1;
 	CTankObject temp;
 	temp.m_IsDie = false;
 	if (4 == nType) {
@@ -423,6 +424,12 @@ int CTankObject::getTankType()
 int CTankObject::getTankBlood()
 {
 	return m_nBlood;
+}
+
+int CTankObject::putTankBlood(int x)
+{
+	m_nBlood=x;
+	return x;
 }
 
 int CTankObject::getTankScores()
