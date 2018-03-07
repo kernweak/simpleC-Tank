@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameObject.h"
 #include <conio.h>
-
+#include <time.h>  
 
 CGameObject::CGameObject()
 {
@@ -165,26 +165,32 @@ bool CGameObject::InitTankInfo()
 bool CGameObject::StartGame()
 {
 	InitTankInfo();
-	bool pauseFlag = true;//0为暂停
+	srand(time(NULL));//生成一个随机数
+	bool pauseFlag = false;//1为暂停
 	bool stopMove = true;
 	char press = 0;
 	char dir[4] = { 'w','s', 'd','a' };
+	clock_t start, finish;//敌军坦克移动间隔
+	start = clock();
 	while (press != 0X1b && stopMove) {
 		if (_kbhit()) {
 			press = _getch();
 			if (press == 0x20) {
 				pauseFlag = !pauseFlag;
 			}
-			if (press == 0x71)
+			if (press == 0x71)//发射炮弹
 			{
 			}
 
-			for (int i = 0;i < 6;i++) {
+			for (int i = 0;i < 6;i++) {//先将玩家坦克从地图擦除再移动
 				m_MapObject.setMapValue(m_vecTankObject[0].getbody(i).Y, m_vecTankObject[0].getbody(i).X, 0);
 			}
+			//移动0号坦克，也就是玩家坦克
 			m_vecTankObject[0].MoveTank(press);
+			//把容器0位置坦克写入到地图中
 			pushOneTankMap(m_MapObject, 0);
 			for (int i = 0;i < m_vecTankObject.size();i++) {
+				//把更新过的地图写入到没一个坦克
 				m_vecTankObject[i].setMapObj(&m_MapObject);
 				m_vecTankObject[i].DrawObject();
 			}
@@ -193,6 +199,34 @@ bool CGameObject::StartGame()
 		if (pauseFlag) {
 			continue;
 		}
+		finish = clock();
+		if (finish - start > 400) {
+			start = finish;
+			//先将其他坦克从地图擦除再移动
+			for (int i = 1;i <m_vecTankObject.size();i++) {
+				for (int j = 0;j < 6;j++) {//先将其他坦克从地图擦除再移动
+					m_MapObject.setMapValue(m_vecTankObject[i].getbody(j).Y, m_vecTankObject[i].getbody(j).X, 0);
+				}
+			}
+			//移动其他坦克
+			int a, b;
+			
+			b = rand() % 2;
+//			for (int i = 0;i < b;i++) {
+				for (int j = 1;j < m_vecTankObject.size();j++) {
+						a = rand() % 4;
+						m_vecTankObject[j].MoveTank(dir[a]);
+						pushOneTankMap(m_MapObject, j);
+				}
+				for (int i = 0;i < m_vecTankObject.size();i++) {
+					//把更新过的地图写入到没一个坦克
+					m_vecTankObject[i].setMapObj(&m_MapObject);
+					m_vecTankObject[i].DrawObject();
+				}
+	//		}
+
+		}
+
 	}
 
 	return true;
