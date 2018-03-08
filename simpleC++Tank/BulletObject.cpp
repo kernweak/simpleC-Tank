@@ -115,14 +115,17 @@ bool CBulletObject::BulletCollision(CBulletObject & BulletObject, vector<CTankOb
 				if (BulletObject == vecTankObject[i]) {
 					if (vecTankObject[i].getTankBlood() - 1 > 0)
 						vecTankObject[i].putTankBlood(vecTankObject[i].getTankBlood() - 1);
-					int num = vecTankObject[i].getTankType();
+					
+					else {
+						int num = vecTankObject[i].getTankType();
 						vecTankObject[i].ClsObject();
 						for (int j = 0;j < 6;j++) {
 							m_pMapObject->setMapValue(vecTankObject[i].getbody(j).Y, vecTankObject[i].getbody(j).X, 0);
 						}
-						vecTankObject.erase(vecTankObject.begin()+i);
+						vecTankObject.erase(vecTankObject.begin() + i);
 						if (tankSum > 0);
-							//getTankBirthPlace();
+						//getTankBirthPlace();
+					}
 				}
 			}
 		}
@@ -137,14 +140,31 @@ bool CBulletObject::BulletCollision(CBulletObject & BulletObject, vector<CTankOb
 						vecTankObject[i].putTankBlood(vecTankObject[i].getTankBlood() - 1);
 					else {
 						int num = vecTankObject[i].getTankType();
+						vecTankObject[0].putTankScore(vecTankObject[0].getTankScores() + 10);
 						vecTankObject[i].ClsObject();
 						for (int j = 0;j < 6;j++) {
 							m_pMapObject->setMapValue(vecTankObject[i].getbody(j).Y, vecTankObject[i].getbody(j).X, 0);
 						}
 						vecTankObject.erase(vecTankObject.begin() + i);
-						if (tankSum > 0);
+						if(tankSum>0)
+						tankSum = tankSum - 1;
+						if (tankSum > 0) {
+							//当坦克被击毁是生成一个新坦克
+							CTankObject TemTankObject;
+							TemTankObject = TemTankObject.getTankBirthPlace(num);
+							vecTankObject.push_back(TemTankObject);
+							for (int j = 0;j < 6;j++) {
+
+								m_pMapObject->setMapValue(TemTankObject.getbody(j).Y, TemTankObject.getbody(j).X, TemTankObject.getm_nType());
+							}
+							for (int i = 0;i <vecTankObject.size();i++) {
+								vecTankObject[i].setMapObj(m_pMapObject);
+								vecTankObject[i].DrawObject();
+							}
+						}
 						//getTankBirthPlace();
 					}
+					break;
 				}
 			}
 		}

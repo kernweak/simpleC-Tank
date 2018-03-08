@@ -36,6 +36,7 @@ public:
 	int getTankType();
 	int getTankBlood();
 	int putTankBlood(int x);
+	int putTankScore(int y);
 	int getTankScores();
 private:
 	bool m_IsDie;//Ì¹¿ËÊÇ·ñËÀÍö

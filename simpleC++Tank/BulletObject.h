@@ -47,3 +47,4 @@ private:
 	CMapObject* m_pMapObject;//╣ьм╪╤тоС
 };
 
+	

@@ -2,6 +2,10 @@
 #include "GameObject.h"
 #include <conio.h>
 #include <time.h>  
+#include <string>
+#include <iostream>
+using namespace std;
+#include <sstream>
 
 CGameObject::CGameObject()
 {
@@ -36,6 +40,33 @@ CMapObject & CGameObject::getMap()
 {
 	return m_MapObject;
 	// TODO: 在此处插入 return 语句
+}
+
+void CGameObject::prints()
+{	//打印得分
+	int c=m_vecTankObject[0].getTankScores();
+	string b = "得分是:";
+	string  d= to_string(c);
+	b = b + d;
+	char* p = (char*)b.c_str();
+	CDrawObject a;
+	a.WriteChar(56, 2,p , 7);
+	//打印剩余血量
+	c = m_vecTankObject[0].getTankBlood();
+	b = "玩家坦克剩余血量是:";
+	d = to_string(c);
+	b = b + d;
+	p = (char*)b.c_str();
+	a.WriteChar(56, 3, p, 7);
+
+	c = tankSum;
+	b = "此关剩余刷新坦克数量为:";
+	d = to_string(c);
+	b = b + d;
+	p = (char*)b.c_str();
+	a.WriteChar(56, 4, p, 7);
+
+//	a.WriteChar(56, 4, "3按下z键退出编辑", 7);
 }
 
 
@@ -175,6 +206,7 @@ bool CGameObject::StartGame()
 	start = clock();
 	start1 = clock();
 	while (press != 0X1b && stopMove) {
+		prints();
 		if (_kbhit()) {
 			press = _getch();
 			if (press == 0x20) {

@@ -39,7 +39,7 @@ CTankObject CTankObject::getTankBirthPlace(int nType)//4为自己，5为友军
 		temp.m_nPosY = 46;
 		temp.m_nDir = UP;
 		temp.m_nType = 4;
-		temp.m_nBlood = 3;
+		temp.m_nBlood = 5;
 		temp.m_nScore = 0;
 		initp(UP, temp);
 	}
@@ -430,6 +430,12 @@ int CTankObject::putTankBlood(int x)
 {
 	m_nBlood=x;
 	return x;
+}
+
+int CTankObject::putTankScore(int y)
+{
+	m_nScore = y;
+	return y;
 }
 
 int CTankObject::getTankScores()

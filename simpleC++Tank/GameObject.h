@@ -28,7 +28,7 @@ public:
 	//通过A*移动敌方坦克
 //	bool MoveNPC();
 	CMapObject& getMap();
-	
+	void prints();
 private:
 	//地图对象（整个游戏都是使用该地图对象）
 	CMapObject m_MapObject;
@@ -42,5 +42,6 @@ private:
 	bool SetWindowSize(char* pszWindowTitle, int nX, int nY);
 	//中英文切换
 	bool shiftThing();
+
 };
 
