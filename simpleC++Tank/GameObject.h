@@ -29,6 +29,7 @@ public:
 //	bool MoveNPC();
 	CMapObject& getMap();
 	void prints();
+	void printIntorduce();
 private:
 	//地图对象（整个游戏都是使用该地图对象）
 	CMapObject m_MapObject;

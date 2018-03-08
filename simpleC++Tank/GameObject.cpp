@@ -63,10 +63,54 @@ void CGameObject::prints()
 	b = "此关剩余刷新坦克数量为:";
 	d = to_string(c);
 	b = b + d;
-	p = (char*)b.c_str();
+	 p = (char*)b.c_str();
 	a.WriteChar(56, 4, p, 7);
 
 //	a.WriteChar(56, 4, "3按下z键退出编辑", 7);
+}
+
+void CGameObject::printIntorduce()
+{	
+	CDrawObject a;
+	string b = "坦克颜色:";
+	char* p = (char*)b.c_str();
+	a.WriteChar(56, 13, p, 7);
+	a.WriteChar(61, 13, "█", 5);
+	b = "坦克生命:3";
+	p = (char*)b.c_str();
+	a.WriteChar(56, 14, p, 7);
+
+	b = "坦克颜色:";
+	 p = (char*)b.c_str();
+	a.WriteChar(56, 15, p, 7);
+	a.WriteChar(61, 15, "█", 6);
+	b = "坦克生命:1";
+	p = (char*)b.c_str();
+	a.WriteChar(56, 16, p, 7);
+
+	b = "坦克颜色:";
+	p = (char*)b.c_str();
+	a.WriteChar(56, 17, p, 7);
+	a.WriteChar(61, 17, "█", 7);
+	b = "坦克生命:2";
+	p = (char*)b.c_str();
+	a.WriteChar(56, 18, p, 7);
+
+	b = "坦克颜色:";
+	p = (char*)b.c_str();
+	a.WriteChar(56, 19, p, 7);
+	a.WriteChar(61, 19, "█", 8);
+	b = "坦克生命:2";
+	p = (char*)b.c_str();
+	a.WriteChar(56, 20, p, 7);
+
+	b = "坦克颜色:";
+	p = (char*)b.c_str();
+	a.WriteChar(56, 21, p, 7);
+	a.WriteChar(61, 21, "█", 4);
+	b = "坦克生命:5";
+	p = (char*)b.c_str();
+	a.WriteChar(56, 22, p, 7);
 }
 
 
@@ -205,6 +249,7 @@ bool CGameObject::StartGame()
 	clock_t start1, finish1;//子弹移动间隔
 	start = clock();
 	start1 = clock();
+	printIntorduce();
 	while (press != 0X1b && stopMove) {
 		prints();
 		if (_kbhit()) {
@@ -257,8 +302,10 @@ bool CGameObject::StartGame()
 						pushOneTankMap(m_MapObject, j);
 						if ((a = rand() % 8) % 4 == 0) {
 							CBulletObject TemBulletObject;
-							TemBulletObject = TemBulletObject.CreateBullet(m_vecTankObject[j], m_vecTankObject);
-							m_vecBulletObject.push_back(TemBulletObject);
+							if (m_vecTankObject[j].getm_nType() == 5 && (m_vecTankObject[j].getTankPosX() > 25 && m_vecTankObject[j].getTankPosX() < 33) && (m_vecTankObject[j].getTankPosY() > 41)) {
+								TemBulletObject = TemBulletObject.CreateBullet(m_vecTankObject[j], m_vecTankObject);
+								m_vecBulletObject.push_back(TemBulletObject);
+							}
 						}
 
 				}
